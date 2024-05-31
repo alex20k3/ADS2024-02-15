@@ -48,6 +48,7 @@ public class B_MergeSort {
         int[] right = new int[size - mid];
         System.arraycopy(a, 0, left, 0, mid);
         if (size - mid >= 0) System.arraycopy(a, mid, right, mid - mid, size - mid);
+        //рекурсивно
         mergeSort(left, mid);
         mergeSort(right, size - mid);
 
