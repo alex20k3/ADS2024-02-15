@@ -14,7 +14,6 @@ package by.it.group310902.krukovich.lesson02;
  */
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Scanner;
 

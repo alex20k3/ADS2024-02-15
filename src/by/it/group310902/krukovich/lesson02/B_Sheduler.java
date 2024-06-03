@@ -2,7 +2,6 @@ package by.it.group310902.krukovich.lesson02;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Arrays;
 /*
 Даны интервальные события events
 реализуйте метод calcStartTimes, так, чтобы число принятых к выполнению
@@ -37,7 +36,8 @@ public class B_Sheduler {
                 new Event(8, 9),  new Event(4, 6), new Event(8, 10), new Event(7, 10)
         };
 
-        List<Event> starts = instance.calcStartTimes(events,0,10);  //рассчитаем оптимальное заполнение аудитории
+        //рассчитаем оптимальное заполнение аудитории
+        List<Event> starts = instance.calcStartTimes(events, 0, 10);
         System.out.println(starts);                                 //покажем рассчитанный график занятий
     }
 

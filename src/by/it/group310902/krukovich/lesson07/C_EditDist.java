@@ -1,6 +1,5 @@
 package by.it.group310902.krukovich.lesson07;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Scanner;
@@ -46,7 +45,7 @@ public class C_EditDist {
         //!!!!!!!!!!!!!!!!!!!!!!!!!     НАЧАЛО ЗАДАЧИ     !!!!!!!!!!!!!!!!!!!!!!!!!
         int m = one.length();
         int n = two.length();
-        int[][] a = new int[m + 1][n + 1];
+        int[][] a = new int[m + 1][n + 1];//таблица динамического программирования
 
         for (int i = 0; i <= m; i++) {
             a[i][0] = i;
@@ -57,28 +56,33 @@ public class C_EditDist {
 
         for (int i = 1; i <= m; i++) {
             for (int j = 1; j <= n; j++) {
-                if (one.charAt(i - 1) == two.charAt(j - 1)) {
+                if (one.charAt(i - 1) == two.charAt(j - 1)) {//если символы совпадают, то расстояние равно расстоянию между предыдущими символами
                     a[i][j] = a[i - 1][j - 1];
-                } else {
+                } else {//иначе равно 1 + минимум из трех случаев: вставки, удаления или замены
                     a[i][j] = 1 + Math.min(Math.min(a[i - 1][j], a[i][j - 1]), a[i - 1][j - 1]);
                 }
             }
         }
         StringBuilder result = new StringBuilder();
         int i = m, j = n;
+        // обратный проход для восстановления последовательности операций, необходимых для преобразования одной строки в другую
         while (i > 0 || j > 0) {
+            //если элементы равны добавляем смивол #
             if (i > 0 && j > 0 && one.charAt(i - 1) == two.charAt(j - 1)) {
                 result.insert(0, "#,");
                 i--;
                 j--;
             } else {
+                // если требуется замена  ~ и заменяемый символ
                 if (i > 0 && j > 0 && a[i - 1][j - 1] < a[i - 1][j] && a[i - 1][j - 1] < a[i][j - 1]) {
                     result.insert(0, "~" + two.charAt(j - 1) + ",");
                     i--;
                     j--;
+                    // вставка  + и вставляемый символ
                 } else if (j > 0 && (i == 0 || a[i][j - 1] <= a[i - 1][j])) {
                     result.insert(0, "+" + two.charAt(j - 1) + ",");
                     j--;
+                    // удаление  - и удаляемый символ
                 } else {
                     result.insert(0, "-" + one.charAt(i - 1) + ",");
                     i--;
@@ -88,7 +92,7 @@ public class C_EditDist {
 
 
         //!!!!!!!!!!!!!!!!!!!!!!!!!     КОНЕЦ ЗАДАЧИ     !!!!!!!!!!!!!!!!!!!!!!!!!
-        return result.toString();
+        return result.toString(); //строка операций для преобразования первой строки во вторую
     }
 
 

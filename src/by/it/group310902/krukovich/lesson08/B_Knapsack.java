@@ -1,6 +1,5 @@
 package by.it.group310902.krukovich.lesson08;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Scanner;
@@ -39,9 +38,9 @@ public class B_Knapsack {
         // Заполнение таблицы
         for (int i = 1; i <= n; i++) {
             for (int j = 0; j <= W; j++) {
-                if (gold[i - 1] <= j) {
+                if (gold[i - 1] <= j) { //если вес теущего слитка меньше или равен j то вычислется максимум из не брать слиток и взять текущий слиток
                     dp[i][j] = Math.max(dp[i - 1][j], dp[i - 1][j - gold[i - 1]] + gold[i - 1]);
-                } else {
+                } else {//иначе берется значение без учета текущего слитка
                     dp[i][j] = dp[i - 1][j];
                 }
             }

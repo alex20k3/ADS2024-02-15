@@ -35,7 +35,7 @@ public class A_EditDist {
 
     int getDistanceEdinting(String one, String two) {
         //!!!!!!!!!!!!!!!!!!!!!!!!!     НАЧАЛО ЗАДАЧИ     !!!!!!!!!!!!!!!!!!!!!!!!!
-        if (one.length() == 0) {
+        if (one.length() == 0) { //Если одна из строк пуста, то расстояние редактирования равно длине другой строки, так как необходимо вставить/удалить все символы.
             return two.length();
         }
 
@@ -45,11 +45,13 @@ public class A_EditDist {
 
         int result = 0;
         if (one.charAt(0) == two.charAt(0)) {
-            result = getDistanceEdinting(one.substring(1), two.substring(1));
-        } else {
-            int insert = getDistanceEdinting(one, two.substring(1));
+            result = getDistanceEdinting(one.substring(1), two.substring(1));//если символы равны, пропускаем символы и переходим к сравнению оставшихся частей строк
+        } else {//расстояние редактирования равно 1 + минимум из трех вариантов
+            int insert = getDistanceEdinting(one, two.substring(1));//вычисляме расстояния редактирования для первой строки и укороченной на один символ второй
+
             int delete = getDistanceEdinting(one.substring(1), two);
             int replace = getDistanceEdinting(one.substring(1), two.substring(1));
+            // выбираем наименьший из трех вариантов
             result = 1 + Math.min(Math.min(insert, delete), replace);
         }
         //!!!!!!!!!!!!!!!!!!!!!!!!!     КОНЕЦ ЗАДАЧИ     !!!!!!!!!!!!!!!!!!!!!!!!!

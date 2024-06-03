@@ -1,6 +1,5 @@
 package by.it.group310902.krukovich.lesson08;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Scanner;
@@ -46,7 +45,7 @@ public class A_Knapsack {
             for (int j = 0; j <= W; j++) {
                 dp[i][j] = dp[i - 1][j]; // Не берем текущий предмет
                 for (int k = 1; k * gold[i - 1] <= j; k++) {
-                    dp[i][j] = Math.max(dp[i][j], dp[i - 1][j - k * gold[i - 1]] + k * gold[i - 1]);
+                    dp[i][j] = Math.max(dp[i][j], dp[i - 1][j - k * gold[i - 1]] + k * gold[i - 1]);// вычисляем максимум из двух вариантов
                     // Берем k экземпляров текущего предмета
                 }
             }
